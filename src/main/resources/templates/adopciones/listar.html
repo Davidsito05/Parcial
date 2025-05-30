@@ -133,7 +133,8 @@
           <th>ID</th>
           <th>Mascota</th>
           <th>Adoptante</th>
-          <th>Fecha</th>
+          <th>Fecha Solicitud</th>
+          <th>Fecha Aprobación</th>
           <th>Estado</th>
           <th class="actions-col">Acciones</th>
         </tr>
@@ -143,14 +144,14 @@
           <td th:text="${a.id}">1</td>
           <td th:text="${a.mascota.nombre}">Fido</td>
           <td th:text="${a.adoptante.nombre}">Juan</td>
-          <td th:text="${#dates.format(a.fecha, 'dd/MM/yyyy')}">01/01/2025</td>
+          <td th:text="${#dates.format(a.fechaSolicitud, 'dd/MM/yyyy')}">01/01/2025</td>
+          <td th:text="${a.fechaAprobacion != null} ? ${#dates.format(a.fechaAprobacion, 'dd/MM/yyyy')} : 'Pendiente'">Pendiente</td>
           <td th:text="${a.estado}">Pendiente</td>
           <td class="actions-col">
             <a class="btn btn-sm btn-primary mr-2" th:href="@{/adopciones/editar/{id}(id=${a.id})}">
               <i class="fas fa-edit"></i>
             </a>
-            <a class="btn btn-sm btn-danger" th:href="@{/adopciones/eliminar/{id}(id=${a.id})}"
-               onclick="return confirm('¿Eliminar adopción?');">
+            <a class="btn btn-sm btn-danger" th:href="@{/adopciones/eliminar/{id}(id=${a.id})}" onclick="return confirm('¿Eliminar adopción?');">
               <i class="fas fa-trash"></i>
             </a>
           </td>
