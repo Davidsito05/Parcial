@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title th:text="${adopcion.id} == null ? 'Crear Adopción' : 'Editar Adopción'">Adopción</title>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/darkly/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+
+  <style>
+    body {
+      background-color: #121416;
+      color: #eceff1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .navbar {
+      background-color: #1f2428;
+    }
+    .navbar-brand, .navbar-nav .nav-link {
+      color: #eceff1 !important;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #ff6e40 !important;
+    }
+    .form-card {
+      background-color: #24292e;
+      margin: 3rem auto;
+      padding: 3rem 2.5rem;
+      border-radius: 1rem;
+      max-width: 420px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    }
+    .form-card h4 {
+      color: #eceff1;
+      margin-bottom: 2rem;
+      font-weight: 600;
+      text-align: center;
+      font-size: 1.8rem;
+    }
+    .form-group label {
+      color: #eceff1;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .form-control {
+      background-color: #1f2428;
+      border: 1px solid #2e3136;
+      color: #eceff1;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+    .form-control::placeholder {
+      color: #555b62;
+    }
+    .form-control:focus {
+      background-color: #2e3136;
+      border-color: #ff6e40;
+      color: #eceff1;
+      outline: none;
+      box-shadow: 0 0 8px #ff6e40;
+    }
+    .btn-success {
+      background-color: #00e676;
+      border-color: #00e676;
+      padding: 0.6rem 1.6rem;
+      font-size: 1.1rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-success:hover {
+      background-color: #00c853;
+      border-color: #00c853;
+    }
+    .btn-outline-light {
+      color: #eceff1;
+      border-color: #eceff1;
+      padding: 0.6rem 1.6rem;
+      font-size: 1.1rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-outline-light:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    .form-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+      gap: 1rem;
+    }
+    footer {
+      background-color: #1a1c1f;
+      color: #90a4ae;
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+      <i class="fas fa-paw"></i> AdopciónMascotas
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav"
+            aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="/usuarios">Usuarios</a></li>
+        <li class="nav-item"><a class="nav-link" href="/mascotas">Mascotas</a></li>
+        <li class="nav-item"><a class="nav-link" href="/adopciones">Adopciones</a></li>
+        <li class="nav-item"><a class="nav-link" href="/visitas">Visitas</a></li>
+        <li class="nav-item"><a class="nav-link" href="/registros">Registros Vet.</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- FORM -->
+  <div class="form-card">
+    <h4 th:text="${adopcion.id} == null ? 'Crear Adopción' : 'Editar Adopción'">Crear Adopción</h4>
+    <form th:action="@{/adopciones}" th:object="${adopcion}" method="post">
+      <input type="hidden" th:if="${adopcion.id}" th:field="*{id}" />
+
+      <div class="form-group">
+        <label>Mascota</label>
+        <select class="form-control" th:field="*{mascota.id}" required>
+          <option th:each="m : ${mascotas}" th:value="${m.id}" th:text="${m.nombre}">Mascota</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Adoptante</label>
+        <select class="form-control" th:field="*{adoptante.id}" required>
+          <option th:each="a : ${adoptantes}" th:value="${a.id}" th:text="${a.nombre}">Adoptante</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Estado</label>
+        <select class="form-control" th:field="*{estado}" required>
+          <option value="pendiente">Pendiente</option>
+          <option value="aprobada">Aprobada</option>
+          <option value="rechazada">Rechazada</option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-success">
+          <i class="fas fa-save"></i> Guardar
+        </button>
+        <a th:href="@{/adopciones}" class="btn btn-outline-light">
+          <i class="fas fa-times"></i> Cancelar
+        </a>
+      </div>
+    </form>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <small>&copy; 2025 PlataformaAdopcionMascotas. Todos los derechos reservados.</small>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>

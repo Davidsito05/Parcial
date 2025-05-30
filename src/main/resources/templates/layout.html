@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title th:insert="${pageTitle}">AdopciónMascotas</title>
+
+    <!-- Tema oscuro con Bootstrap Darkly -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/darkly/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: #121416;
+        color: #eceff1;
+      }
+      .navbar {
+        background-color: #1f2428;
+      }
+      .navbar-brand,
+      .navbar-nav .nav-link {
+        color: #eceff1 !important;
+      }
+      .navbar-nav .nav-link:hover {
+        color: #ff6e40 !important;
+      }
+      footer {
+        background-color: #1a1c1f;
+        color: #90a4ae;
+        padding: 1rem 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg">
+      <a class="navbar-brand" th:href="@{/}">
+        <i class="fas fa-paw"></i> AdopciónMascotas
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#mainNav"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/usuarios}">Usuarios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/mascotas}">Mascotas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/adopciones}">Adopciones</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/visitas}">Visitas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/registros}">Registros Vet.</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container py-4">
+      <!-- aquí se inyectará el contenido de cada vista -->
+      <div th:fragment="content"></div>
+    </div>
+
+    <footer class="text-center">
+      <small>&copy; 2025 PlataformaAdopcionMascotas</small>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+  </body>
+</html>
