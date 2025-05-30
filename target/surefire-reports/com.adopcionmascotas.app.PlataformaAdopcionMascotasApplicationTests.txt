@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.adopcionmascotas.app.PlataformaAdopcionMascotasApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.965 s -- in com.adopcionmascotas.app.PlataformaAdopcionMascotasApplicationTests

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Listado de Visitas</title>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/darkly/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+
+  <style>
+    body {
+      background:#121416;
+      color:#eceff1;
+      min-height:100vh;
+      margin:0;
+      display:flex;
+      flex-direction:column;
+    }
+    .navbar {
+      background:#1f2428;
+    }
+    .navbar-brand, .navbar-nav .nav-link {
+      color:#eceff1 !important;
+    }
+    .navbar-nav .nav-link:hover {
+      color:#ff6e40 !important;
+    }
+    .page-header {
+      margin: 2rem auto 1rem;
+      padding: 2rem 1rem;
+      background: #1a1c1f;
+      border-radius: 0.5rem;
+      max-width: 960px;
+      text-align: center;
+    }
+    .page-header h2 {
+      margin-bottom: 1rem;
+    }
+    .btn-success {
+      background:#00e676;
+      border-color:#00e676;
+    }
+    .btn-success:hover {
+      background:#00c853;
+      border-color:#00c853;
+    }
+    .table-container {
+      background:#24292e;
+      padding:1.5rem;
+      border-radius:0.5rem;
+      box-shadow:0 3px 8px rgba(0,0,0,0.5);
+      max-width: 960px;
+      margin: 0 auto;
+      overflow-x:auto;
+      flex:1;
+    }
+    table.custom-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+    table.custom-table thead th {
+      background: #1f2428;
+      color: #eceff1;
+      border:none;
+      padding: 1rem;
+    }
+    table.custom-table thead th:first-child {
+      border-top-left-radius: 0.5rem;
+    }
+    table.custom-table thead th:last-child {
+      border-top-right-radius: 0.5rem;
+    }
+    table.custom-table tbody tr:nth-of-type(odd) {
+      background: rgba(255,255,255,0.02);
+    }
+    table.custom-table tbody tr:hover {
+      background: rgba(255,255,255,0.08);
+      cursor: pointer;
+    }
+    table.custom-table td {
+      padding: 0.75rem 1rem;
+      color: #cfd8dc;
+      border: none;
+    }
+    .actions-col {
+      text-align: center;
+      white-space: nowrap;
+    }
+    footer {
+      background:#1a1c1f;
+      color:#90a4ae;
+      padding: 1rem 0;
+      text-align: center;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+      <i class="fas fa-paw"></i> AdopciónMascotas
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav"
+            aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="/usuarios">Usuarios</a></li>
+        <li class="nav-item"><a class="nav-link" href="/mascotas">Mascotas</a></li>
+        <li class="nav-item"><a class="nav-link" href="/adopciones">Adopciones</a></li>
+        <li class="nav-item"><a class="nav-link" href="/visitas">Visitas</a></li>
+        <li class="nav-item"><a class="nav-link" href="/registros">Registros Vet.</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <h2>Listado de Visitas</h2>
+    <a class="btn btn-success" th:href="@{/visitas/nuevo}">
+      <i class="fas fa-plus"></i> Nueva Visita
+    </a>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-container">
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Voluntario</th>
+          <th>Fecha</th>
+          <th>Descripción</th>
+          <th class="actions-col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="v : ${visitas}">
+          <td th:text="${v.id}">1</td>
+          <td th:text="${v.voluntario.nombre}">Juan Pérez</td>
+          <td th:text="${#dates.format(v.fecha, 'dd/MM/yyyy')}">01/01/2025</td>
+          <td th:text="${v.descripcion}">Descripción visita</td>
+          <td class="actions-col">
+            <a class="btn btn-sm btn-primary mr-2" th:href="@{/visitas/editar/{id}(id=${v.id})}">
+              <i class="fas fa-edit"></i>
+            </a>
+            <a class="btn btn-sm btn-danger" th:href="@{/visitas/eliminar/{id}(id=${v.id})}" onclick="return confirm('¿Eliminar visita?');">
+              <i class="fas fa-trash"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <small>&copy; 2025 PlataformaAdopcionMascotas. Todos los derechos reservados.</small>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>

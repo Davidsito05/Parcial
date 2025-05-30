@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestión de Usuarios</title>
+
+  <!-- Bootstrap Darkly theme -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/darkly/bootstrap.min.css"
+    rel="stylesheet"/>
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    rel="stylesheet"/>
+
+  <style>
+    /* ========================================
+       Reset básico y layout general
+    ======================================== */
+    body {
+      background-color: #121416;
+      color: #eceff1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+    }
+    a { text-decoration: none; }
+
+    /* ========================================
+       Navbar
+    ======================================== */
+    .navbar {
+      background-color: #1f2428;
+    }
+    .navbar .navbar-brand,
+    .navbar .nav-link {
+      color: #eceff1 !important;
+    }
+    .navbar .nav-link:hover {
+      color: #ff6e40 !important;
+    }
+
+    /* ========================================
+       Header (título + botón)
+    ======================================== */
+    .page-header {
+      margin: 2rem auto 1rem;
+      padding: 2rem 1rem;
+      background-color: #1a1c1f;
+      border-radius: 0.5rem;
+      max-width: 960px;
+      text-align: center;
+    }
+    .page-header h2 {
+      margin-bottom: 1rem;
+      color: #eceff1;
+      font-size: 2rem;
+    }
+    .btn-info {
+      background-color: #17a2b8;
+      border-color: #17a2b8;
+    }
+    .btn-info:hover {
+      background-color: #138496;
+      border-color: #117a8b;
+    }
+
+    /* ========================================
+       Contenedor de la tabla
+    ======================================== */
+    .card-container {
+      flex: 1;
+      padding-bottom: 2rem;
+    }
+    .table-container {
+      background-color: #24292e;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+      max-width: 960px;
+      margin: 0 auto;
+      overflow-x: auto;
+    }
+
+    /* ========================================
+       Estilos avanzados para la tabla
+    ======================================== */
+    table.custom-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+    /* Cabecera */
+    table.custom-table thead th {
+      background-color: #1f2428;
+      color: #eceff1;
+      border-bottom: none;
+      padding: 1rem;
+    }
+    table.custom-table thead th:first-child {
+      border-top-left-radius: 0.5rem;
+    }
+    table.custom-table thead th:last-child {
+      border-top-right-radius: 0.5rem;
+    }
+    /* Filas alternadas */
+    table.custom-table tbody tr:nth-of-type(odd) {
+      background-color: rgba(255,255,255,0.02);
+    }
+    /* Hover destacado */
+    table.custom-table tbody tr:hover {
+      background-color: rgba(255,255,255,0.08);
+      cursor: pointer;
+    }
+    /* Celdas */
+    table.custom-table td {
+      border: none;
+      padding: 0.75rem 1rem;
+      color: #cfd8dc;
+    }
+    /* Columna de acciones */
+    .actions-col {
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    /* ========================================
+       Footer
+    ======================================== */
+    footer {
+      background-color: #1a1c1f;
+      color: #90a4ae;
+      padding: 1rem 0;
+      text-align: center;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+      <i class="fas fa-paw"></i> AdopciónMascotas
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" th:href="@{/usuarios}">Usuarios</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/mascotas}">Mascotas</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/adopciones}">Adopciones</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/visitas}">Visitas</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/registros}">Registros Vet.</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HEADER SEPARADO -->
+  <div class="page-header">
+    <h2>Gestión de Usuarios</h2>
+    <a class="btn btn-info" th:href="@{/usuarios/nuevo}">
+      <i class="fas fa-plus"></i> Nuevo Usuario
+    </a>
+  </div>
+
+  <!-- TABLE -->
+  <div class="card-container">
+    <div class="table-container">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th class="actions-col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="u : ${usuarios}">
+            <td th:text="${u.id}">1</td>
+            <td th:text="${u.nombre}">Juan</td>
+            <td th:text="${u.email}">juan@mail.com</td>
+            <td th:text="${u.rol}">ADMIN</td>
+            <td class="actions-col">
+              <a class="btn btn-sm btn-primary mr-2"
+                 th:href="@{/usuarios/editar/{id}(id=${u.id})}">
+                <i class="fas fa-edit"></i>
+              </a>
+              <a class="btn btn-sm btn-danger"
+                 th:href="@{/usuarios/eliminar/{id}(id=${u.id})}"
+                 onclick="return confirm('¿Eliminar usuario?');">
+                <i class="fas fa-trash"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <small>&copy; 2025 PlataformaAdopcionMascotas. Todos los derechos reservados.</small>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>

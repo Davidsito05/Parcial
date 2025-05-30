@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plataforma Adopción Mascotas</title>
+
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/darkly/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    rel="stylesheet"
+  />
+
+  <style>
+    body {
+      background-color: #121416;
+      color: #eceff1;
+    }
+
+    /* Hero */
+    .hero {
+      background: none;
+      color: #ddd;
+      padding: 6rem 0 2rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-weight: 700;
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      color: #bbb;
+    }
+    .btn-lg {
+      padding: 0.75rem 1.5rem;
+      font-size: 1.25rem;
+    }
+
+    /* Cards container */
+    .cards-container {
+      max-width: 960px;
+      margin: 2rem auto 4rem;
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .card {
+      flex: 1 1 280px;
+      background-color: #24292e;
+      border-radius: 0.5rem;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 6px 12px rgb(0 0 0 / 0.4);
+      transition: transform 0.2s ease;
+      color: #eceff1;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgb(0 0 0 / 0.6);
+    }
+    .card i {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+    .card h5 {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .card p {
+      flex-grow: 1;
+      text-align: center;
+      color: #cfd8dc;
+      margin-bottom: 1.5rem;
+    }
+    .btn-card {
+      width: 100%;
+      font-weight: 600;
+      padding: 0.75rem;
+      border-radius: 0.4rem;
+      transition: background-color 0.3s ease;
+      text-align: center;
+      display: inline-block;
+    }
+
+    /* Button colors */
+    .btn-usuarios {
+      background-color: #339af0; /* azul */
+      color: white;
+      border: none;
+    }
+    .btn-usuarios:hover {
+      background-color: #1c7ed6;
+    }
+
+    .btn-mascotas {
+      background-color: #00e676; /* verde */
+      color: white;
+      border: none;
+    }
+    .btn-mascotas:hover {
+      background-color: #00c853;
+    }
+
+    .btn-adopciones {
+      background-color: #ffd740; /* amarillo */
+      color: #212121;
+      border: none;
+    }
+    .btn-adopciones:hover {
+      background-color: #ffab00;
+    }
+
+    .btn-visitas {
+      background-color: #f783ac; /* rosa */
+      color: white;
+      border: none;
+    }
+    .btn-visitas:hover {
+      background-color: #d6336c;
+    }
+
+    .btn-registros {
+      background-color: #845ef7; /* morado */
+      color: white;
+      border: none;
+    }
+    .btn-registros:hover {
+      background-color: #5f3dc4;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #1a1c1f;
+      color: #90a4ae;
+      padding: 1rem 0;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg" style="background-color:#1f2428;">
+    <a class="navbar-brand text-light" href="#">
+      <i class="fas fa-paw"></i> AdopciónMascotas
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#mainNav"
+      aria-controls="mainNav"
+      aria-expanded="false"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="/usuarios">Usuarios</a></li>
+        <li class="nav-item"><a class="nav-link" href="/mascotas">Mascotas</a></li>
+        <li class="nav-item"><a class="nav-link" href="/adopciones">Adopciones</a></li>
+        <li class="nav-item"><a class="nav-link" href="/visitas">Visitas</a></li>
+        <li class="nav-item"><a class="nav-link" href="/registros">Registros Vet.</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <h1>Bienvenido a AdopciónMascotas</h1>
+    <p>Conecta con tu próxima mascota y dale un hogar lleno de amor.</p>
+    <a href="/mascotas" class="btn btn-success btn-lg">
+      <i class="fas fa-dog"></i> Ver Mascotas Disponibles
+    </a>
+  </header>
+
+  <section class="cards-container">
+    <div class="card">
+      <i class="fas fa-user text-info"></i>
+      <h5>Gestión de Usuarios</h5>
+      <p>Administra administradores, refugios, adoptantes y voluntarios.</p>
+      <a href="/usuarios" class="btn btn-card btn-usuarios">Ir a Usuarios</a>
+    </div>
+    <div class="card">
+      <i class="fas fa-dog text-success"></i>
+      <h5>Listado de Mascotas</h5>
+      <p>Explora todas las mascotas disponibles para adopción.</p>
+      <a href="/mascotas" class="btn btn-card btn-mascotas">Ver Mascotas</a>
+    </div>
+    <div class="card">
+      <i class="fas fa-hand-holding-heart text-warning"></i>
+      <h5>Solicitudes de Adopción</h5>
+      <p>Gestiona y revisa las solicitudes de adopción pendientes.</p>
+      <a href="/adopciones" class="btn btn-card btn-adopciones">Ver Solicitudes</a>
+    </div>
+    <div class="card">
+      <i class="fas fa-calendar-check" style="color:#f783ac; font-size:3.5rem; margin-bottom:1rem;"></i>
+      <h5>Visitas</h5>
+      <p>Programa y revisa las visitas realizadas a los refugios.</p>
+      <a href="/visitas" class="btn btn-card btn-visitas">Ver Visitas</a>
+    </div>
+    <div class="card">
+      <i class="fas fa-notes-medical" style="color:#845ef7; font-size:3.5rem; margin-bottom:1rem;"></i>
+      <h5>Registros Veterinarios</h5>
+      <p>Consulta y administra los registros médicos de las mascotas.</p>
+      <a href="/registros" class="btn btn-card btn-registros">Ver Registros</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <small>&copy; 2025 PlataformaAdopcionMascotas. Todos los derechos reservados.</small>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>
